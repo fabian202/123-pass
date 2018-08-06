@@ -1,0 +1,47 @@
+<ion-content padding>
+
+  <!-- Float the icon left -->
+  <ion-grid>
+    <ion-row>
+        <ion-col col-3 *ngFor="let c of 4 | times">
+          <button ion-button clear>
+              <ion-icon [name]="passCode.length >= c ? 'radio-button-on' : 'radio-button-off'"></ion-icon>
+          </button>
+        </ion-col>
+    </ion-row>
+      <ion-row *ngFor="let r of buttons">
+          <ion-col col-4 *ngFor="let c of r" (click)="addCharacter(c)">
+              <button ion-button round large outline>{{c}}</button>
+          </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col col-4>
+              <button ion-button round large outline>
+                  <ion-icon name="finger-print"></ion-icon>
+              </button>
+          </ion-col>
+          <ion-col col-4>
+              <button ion-button round large outline (click)="addCharacter(0)">0</button>
+          </ion-col>
+          <ion-col col-4>
+              <button ion-button round large outline (click)="backspace()">
+                  <ion-icon name="backspace"></ion-icon>
+              </button>
+          </ion-col>
+      </ion-row>
+
+      <!-- <ng-template ngFor let-x [ngForOf]="9 | times">
+          <ion-row >
+              <ion-col col-4 *ngFor="let c of 3|times">
+                  <button ion-button round large outline>{{r}} {{c}}</button>
+              </ion-col>
+          </ion-row>
+        </ng-template> -->
+
+    </ion-grid>
+
+    {{passCode}}
+
+
+</ion-content>

@@ -1,0 +1,12 @@
+page-lock-screen {
+    ion-grid {
+        width: 70% !important;
+        margin-top: 30%;
+        ion-col {
+            text-align: center;
+        }
+        button {
+            width: 2rem;
+        }
+    }
+}
