@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the LockScreenPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -17,7 +11,10 @@ export class LockScreenPage {
 
   buttons: any = [];
   passCode: string = '';
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  keyPass: string;
+  createNew: boolean = false;
+  creating: boolean = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
     var matrix = [];
     let init = 1;
     for(var i=0; i<3; i++) {
@@ -30,7 +27,17 @@ export class LockScreenPage {
 
     this.buttons = matrix;
 
-    console.table(this.buttons);
+    storage.ready().then(() => {
+      storage.get('keyPass').then((val) => {
+        console.log('val', val);
+        
+        if(val) {
+          this.keyPass = val;
+        } else {
+          this.createNew = true;
+        }
+      });
+    });
   }
 
   ionViewDidLoad() {
@@ -42,10 +49,28 @@ export class LockScreenPage {
       return;
     }
     this.passCode += character.toString();
+
+    if(this.passCode.length == 4) {
+      //validate the password
+      console.log(this.creating);
+      if(this.creating) {
+        this.storage.set('keyPass', this.passCode);
+        this.go();
+      } else if (this.keyPass === this.passCode) {
+        this.go();
+      } else {
+        this.passCode = '';
+      }
+      //this.go();
+    }
   }
 
   backspace() {
     this.passCode = this.passCode.slice(0, -1);
+  }
+
+  go() {
+    this.navCtrl.setRoot('ListPage');
   }
 
 }

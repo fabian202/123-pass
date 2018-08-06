@@ -22,7 +22,7 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
-
+$text-input-md-highlight-color: #cc99ff;
 
 
 // Named Color Variables
@@ -34,11 +34,15 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
+  primary:    #434343,
+  secondary:  (
+    base:     #F1AC3F,
+    contrast: #242424
+  ),
+  danger:     #F54F5B,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #242424,
+  back:       #363232
 );
 
 

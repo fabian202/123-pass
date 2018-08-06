@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>MyPass</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="logForm()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Cuenta</ion-label>
+        <ion-input type="text" [(ngModel)]="pass.account" name="account"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="pass.user" name="user"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input [(ngModel)]="pass.password" name="pass" type="text"></ion-input>
+        <button type="button" ion-button color="secondary" round item-right (click)="makeid()">
+            <ion-icon name="key"></ion-icon>
+        </button>
+      </ion-item>
+      
+    </ion-list>
+      
+    <div padding>
+      <button color="secondary" type="submit" ion-button block>Guardar</button>
+    </div>
+  </form>
+    
+
+</ion-content>

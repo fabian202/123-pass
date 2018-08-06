@@ -1,0 +1,14 @@
+page-pass-form {
+    ion-list {
+        .item {
+            background-color: color($colors, back, base) !important;
+            color:  color($colors, light, base) !important;
+            padding-left: 0;
+            border-top: 0 !important;
+    
+            .item-inner {
+                padding-left: 16px
+            }
+        }
+    }
+}
