@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -8,7 +9,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  passwords: any = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+    this.storage.get('passwords').then(val => {
+      console.log(val);
+      if(val) {
+        this.passwords = val;
+      }
+    });
   }
 
   ionViewDidLoad() {
@@ -17,6 +26,10 @@ export class ListPage {
 
   openForm() {
     this.navCtrl.push('form');
+  }
+
+  itemSelected(item) {
+    this.navCtrl.push('form', { item: item });
   }
 
 }

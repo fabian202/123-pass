@@ -2,8 +2,12 @@ page-list {
     ion-list {
         // border: 1px solid;
         // border-color: rgba(255, 255, 255, 0.5);
+        .list-header {
+            background-color: color($colors, dark, base) !important;
+            color:  color($colors, secondary, base) !important;
+        }
 
-        .item {
+        .item-block {
             background-color: color($colors, dark, base) !important;
             color:  color($colors, light, base) !important;
             padding-left: 0;

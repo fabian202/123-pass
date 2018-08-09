@@ -72,5 +72,4 @@ export class LockScreenPage {
   go() {
     this.navCtrl.setRoot('ListPage');
   }
-
 }

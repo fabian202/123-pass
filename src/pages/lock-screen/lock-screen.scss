@@ -1,6 +1,6 @@
 page-lock-screen {
     ion-grid {
-        width: 70% !important;
+        width: 90% !important;
         margin-top: 35%;
         ion-col {
             text-align: center;
@@ -9,7 +9,10 @@ page-lock-screen {
             }
         }
         button {
-            width: 2rem;
+            width: 4em !important;
+            height: 4em !important;
+            font-weight: bold;
+            // font-size: 1.5em !important;
         }
     }
 

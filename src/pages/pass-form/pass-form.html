@@ -8,7 +8,7 @@
 
 
 <ion-content padding>
-  <form (ngSubmit)="logForm()">
+  <form (ngSubmit)="store()">
     <ion-list>
 
       <ion-item>
@@ -20,19 +20,27 @@
         <ion-label floating>Usuario</ion-label>
         <ion-input type="text" [(ngModel)]="pass.user" name="user"></ion-input>
       </ion-item>
+
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="pass.email" name="email"></ion-input>
+      </ion-item>
     
       <ion-item>
         <ion-label floating>Password</ion-label>
         <ion-input [(ngModel)]="pass.password" name="pass" type="text"></ion-input>
-        <button type="button" ion-button color="secondary" round item-right (click)="makeid()">
-            <ion-icon name="key"></ion-icon>
+        <button type="button" ion-button color="primary" *ngIf="pass.password" small  item-right (click)="copy()">
+          <ion-icon name="copy"></ion-icon>
+        </button>
+        <button type="button" ion-button color="secondary" small item-right (click)="makeid()">
+          <ion-icon name="key"></ion-icon>
         </button>
       </ion-item>
       
     </ion-list>
       
     <div padding>
-      <button color="secondary" type="submit" ion-button block>Guardar</button>
+      <button color="secondary" type="submit" ion-button block [disabled]="saving">Guardar</button>
     </div>
   </form>
     

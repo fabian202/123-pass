@@ -10,13 +10,12 @@
 <ion-content padding>
 
     <ion-list no-lines>
-        <button ion-item>
-          Uno
+        <ion-list-header>
+            Cuentas
+          </ion-list-header>
+        <button ion-item *ngFor="let item of passwords" (click)="itemSelected(item)">
+          {{item.account}}
         </button> 
-
-        <button ion-item>
-            dos
-          </button> 
       </ion-list>
 
       <ion-fab right bottom>

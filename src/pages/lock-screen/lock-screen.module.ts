@@ -10,6 +10,6 @@ import { TimesPipeModule } from '../../pipes/times/times.module';
   imports: [
     TimesPipeModule,
     IonicPageModule.forChild(LockScreenPage),
-  ],
+  ]
 })
 export class LockScreenPageModule {}

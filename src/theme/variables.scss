@@ -34,7 +34,10 @@ $text-input-md-highlight-color: #cc99ff;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #434343,
+  primary:    (
+    base:     #434343,
+    contrast: #f4f4f4
+  ),
   secondary:  (
     base:     #F1AC3F,
     contrast: #242424
