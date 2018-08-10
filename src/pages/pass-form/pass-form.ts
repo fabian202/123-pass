@@ -75,35 +75,97 @@ export class PassFormPage {
   }
 
 
-  store() {
+  async store() {
+
     if(this.saving) {
       return;
     }
 
     this.saving = true;
     const toast = this.toastCtrl.create({
-      message: 'Guardaro con éxito',
+      message: 'Guardado con éxito',
       duration: 3000
     });
 
-    this.pass._id = '';
-    for (let i = 0; i < 64; i++) {
-      this.pass._id += this.possible.charAt(Math.floor(Math.random() * this.possible.length));
-    }
+    const savePromise = this.storage.get('passwords');
 
-    this.storage.get('passwords').then(val => {
-      let toStore = [];
-      if(val) {
-        val.push(this.pass);
-        toStore = val;
-      } else {
-        toStore.push(this.pass);
+    if(this.item) {
+      // //Update
+      savePromise.then(val => {
+        for (let i = 0; i < val.length; i++) {
+          const id = val[i]._id;
+          if(id == this.item._id) {
+            val[i] = this.pass;
+            val[i]._id = id;
+            break;
+          }
+        }
+        return val;
+      })
+      // this.storage.get('passwords').then(val => {
+      //   for (let i = 0; i < val.length; i++) {
+      //     const id = val[i]._id;
+      //     if(id == this.item._id) {
+      //       val[i] = this.pass;
+      //       val[i]._id = id;
+      //       break;
+      //     }
+         
+      //   }
+
+      //   return val;
+      // }).then(val => {
+      //   this.storage.set('passwords', val).then(() => {
+      //     toast.present();
+      //     setTimeout(() => {
+      //       this.navCtrl.setRoot('ListPage', {}, { animate: true, direction: 'back'});         
+      //     }, 1000);
+      //   });
+      // });
+    } else {
+      //Create
+      this.pass._id = '';
+      for (let i = 0; i < 64; i++) {
+        this.pass._id += this.possible.charAt(Math.floor(Math.random() * this.possible.length));
       }
 
-      return toStore;
+      savePromise.then(val => {
+        let toStore = [];
+        if(val) {
+          val.push(this.pass);
+          toStore = val;
+        } else {
+          toStore.push(this.pass);
+        }
+  
+        return toStore;
+  
+        // this.storage.set('passwords', toStore).then
+      });
+  
+      // this.storage.get('passwords').then(val => {
+      //   let toStore = [];
+      //   if(val) {
+      //     val.push(this.pass);
+      //     toStore = val;
+      //   } else {
+      //     toStore.push(this.pass);
+      //   }
+  
+      //   return toStore;
+  
+      //   // this.storage.set('passwords', toStore).then
+      // }).then(toStore => {
+      //   this.storage.set('passwords', toStore).then(() => {
+      //     toast.present();
+      //     setTimeout(() => {
+      //       this.navCtrl.setRoot('ListPage', {}, { animate: true, direction: 'back'});         
+      //     }, 1000);
+      //   });
+      // });
+    }
 
-      // this.storage.set('passwords', toStore).then
-    }).then(toStore => {
+    savePromise.then(toStore => {
       this.storage.set('passwords', toStore).then(() => {
         toast.present();
         setTimeout(() => {
@@ -111,6 +173,7 @@ export class PassFormPage {
         }, 1000);
       });
     });
+
   }
 
 }
